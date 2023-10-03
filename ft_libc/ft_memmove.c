@@ -19,10 +19,10 @@ void *ft_memmove(void *to, void *from, size_t size)
     return to;
 }
 
-int main()
-{
-    char testAr[] = "Melody is Justin";
-    ft_memmove(&testAr[2], testAr, 6);
-    printf("%s\n", testAr);
-    return 0;
-}
+// int main()
+// {
+//     char testAr[] = "Melody is Justin";
+//     ft_memmove(&testAr[2], testAr, 6);
+//     printf("%s\n", testAr);
+//     return 0;
+// }
