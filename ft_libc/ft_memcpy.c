@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void *ft_memcpy(void *restrict to, const void *restrict from, size_t size)
+void *ft_memcpy(void * to, const void * from, size_t size)
 {
     char *pTo = to;
     char *pFrom = (char *)from;

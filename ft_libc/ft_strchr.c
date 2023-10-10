@@ -1,15 +1,21 @@
 #include <stdio.h>
-char *strchr(const char *string, int c)
+char *ft_strchr(const char *string, int c)
 {
-    char *myPtr = (char *)string;
-    while (*myPtr)
+
+    while (*string)
     {
-        if (*myPtr == (char)c)
+        if (*string == (char)c)
         {
-            return myPtr;
+            return (char *)string;
         }
-        myPtr++;
+        string++;
     }
+
+     if (c == 0)
+    {
+        return (char *)string;
+    }
+
     return NULL;
 }
 

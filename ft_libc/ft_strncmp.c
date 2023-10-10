@@ -1,25 +1,21 @@
 #include <stdio.h>
 
-int strncmp(const char *s1, const char *s2, size_t size)
+int ft_strncmp(const char *s1, const char *s2, size_t size)
 {
-    int diff;
     size_t i = 0;
-    while (i < size && *s1 && *s2)
+    while (i < size)
     {
-        diff = *s1 - *s2;
-        if (diff != 0)
+
+        if (!*s1 || !*s2)
         {
-            return diff;
+            return *(unsigned char *)s1 - *(unsigned char *)s2;
+        }
+
+        else if (*(unsigned char *)s1 != *(unsigned char *)s2)
+        {
+            return *(unsigned char *)s1 - *(unsigned char *)s2;
         }
         i++, s1++, s2++;
     }
-    return diff;
+    return 0;
 }
-
-// int main()
-// {
-//     char str1[] = "capi";
-//     char str2[] = "capitali";
-//     printf("%d", strncmp(str1, str2, 10));
-//     return 0;
-// }
