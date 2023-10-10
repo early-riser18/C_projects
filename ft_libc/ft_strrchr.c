@@ -1,28 +1,22 @@
 #include <stdio.h>
 
-char *strrchr(const char *string, int c)
+char *ft_strrchr(const char *string, int c)
 {
-    char *myPtr = (char *)string;
-    while (*myPtr)
-    {
-        myPtr++;
-    }
+    char *lastOccurence = NULL;
 
-    myPtr--;
-    while (*myPtr)
+    while (*string)
     {
-
-        if (*myPtr == (char)c)
+        if (*string == (char)c)
         {
-            return myPtr;
+            lastOccurence = (char *)string;
         }
-        myPtr--;
+        string++;
     }
-    return NULL;
-}
 
-// int main()
-// {
-//     printf("%s\n", strrchr("", 'h'));
-//     return 0;
-// }
+    if (c == 0)
+    {
+        return (char *)string;
+    }
+
+    return lastOccurence;
+}
