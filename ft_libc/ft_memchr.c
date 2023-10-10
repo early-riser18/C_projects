@@ -5,7 +5,7 @@ void *ft_memchr(const void *block, int c, size_t size)
     unsigned char *myPtr = (unsigned char *)block;
     for (size_t i = 0; i < size; i++, myPtr++)
     {
-        if (c == *myPtr)
+        if ((unsigned char)c == *myPtr)
         {
             return myPtr;
         }

@@ -54,6 +54,9 @@ int ft_atoi(const char *string)
         sum += (*pStrPtr - 48) * power(10, strLen - 1 - i); //
     }
     return sum * sign;
+
+    // leading non-graph characters should just be discarded, instead of exit function.
+    // include plus sign
 }
 
 // int test(int num, const char *string, char *expected)
