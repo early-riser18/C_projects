@@ -1,28 +1,22 @@
 #include <stdio.h>
 
-void *ft_memmove(void *to, void *from, size_t size)
+void	*ft_memmove(void *to, void *from, size_t size)
 {
-    char *toPtr = (char *)to;
-    char *fromPtr = (char *)from;
-    char fromCopy[size + 1];
-    fromCopy[size] = 0;
+	size_t	i;
+	char	from_copy[size + 1];
 
-    for (size_t i = 0; i < size; i++, fromPtr++)
-    {
-        fromCopy[i] = *fromPtr;
-    }
-
-    for (size_t j = 0; j < size; j++, toPtr++)
-    {
-        *toPtr = fromCopy[j];
-    }
-    return to;
+	i = 0;
+	from_copy[size + 1] = 0;
+	while (i < size)
+	{
+		from_copy[i] = ((char *)from)[i];
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		((char *)to)[i] = from_copy[i];
+		i++;
+	}
+	return (to);
 }
-
-// int main()
-// {
-//     char testAr[] = "Melody is Justin";
-//     ft_memmove(&testAr[2], testAr, 6);
-//     printf("%s\n", testAr);
-//     return 0;
-// }

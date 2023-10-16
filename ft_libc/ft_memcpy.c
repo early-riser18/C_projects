@@ -1,22 +1,20 @@
 #include <stdio.h>
 
-void *ft_memcpy(void * to, const void * from, size_t size)
+void	*ft_memcpy(void *to, const void *from, size_t size)
 {
-    char *pTo = to;
-    char *pFrom = (char *)from;
+	char	*p_to;
+	char	*p_from;
+	size_t	i;
 
-    for (size_t i = 0; i < size; i++, pTo++, pFrom++)
-    {
-        *pTo = *pFrom;
-    }
-
-    return to;
+	p_to = to;
+	p_from = (char *)from;
+	i = 0;
+	while (i < size)
+	{
+		*p_to = *p_from;
+		i++;
+		p_to++;
+		p_from++;
+	}
+	return (to);
 }
-
-// int main()
-// {
-//     char testAr[] = "this is a test";
-//     ft_memcpy(&testAr[6], testAr, 2);
-//     printf("%s", testAr);
-//     return 0;
-// }

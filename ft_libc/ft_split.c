@@ -4,78 +4,46 @@
 
 char	**ft_split(char const *s, char c)
 {
-	char		**splitAr;
-	char		**tmpPtr;
+	char		**split_ar;
+	char		**tmp_ptr;
 	char		*occu;
-	int			lenOfSplit;
-	long int	actualAlloc;
-	char		**resizedArr;
-
-	// search until find 1st occurence of c
-	// then create create new var for what is found
-	// add the pointer to the array??
-	// move to next
-	splitAr = (char **)malloc(sizeof(char *) * ft_strlen(s));
-	tmpPtr = splitAr;
+	int			len_split;
+	long int	actual_alloc;
+	char		**resized_arr;
+	
+	split_ar = (char **)malloc(sizeof(char *) * ft_strlen(s));
+	tmp_ptr = split_ar;
 	while (*s)
 	{
 		occu = ft_memchr(s, c, ft_strlen(s));
-		lenOfSplit = (occu == NULL ? ft_strlen(s) : occu - s);
-		if (lenOfSplit < 1)
+		len_split = (occu == NULL ? ft_strlen(s) : occu - s);
+		if (len_split < 1)
 		{
 			s++;
 			continue ;
 		}
-		*tmpPtr = (char *)malloc(lenOfSplit + 1);
-		if (tmpPtr == NULL)
+		*tmp_ptr = (char *)malloc(len_split + 1);
+		if (tmp_ptr == NULL)
 		{
 			printf("Allocation failed\n");
 			return (NULL);
 		}
-		ft_strlcpy(*tmpPtr, s, lenOfSplit + 1);
-		s += (occu == NULL ? lenOfSplit : lenOfSplit + 1);
-		tmpPtr++;
+		ft_strlcpy(*tmp_ptr, s, len_split + 1);
+		s += (occu == NULL ? len_split : len_split + 1);
+		tmp_ptr++;
 	}
-	// Resize final output
-	actualAlloc = (tmpPtr - splitAr);
-	resizedArr = (char **)malloc(sizeof(char *) * (actualAlloc + 1));
-	if (resizedArr == NULL)
+	actual_alloc = (tmp_ptr - split_ar);
+	resized_arr = (char **)malloc(sizeof(char *) * (actual_alloc + 1));
+	if (resized_arr == NULL)
 	{
 		printf("Allocation failed\n");
 		return (NULL);
 	}
-	for (int i = 0; i < actualAlloc; i++)
+	for (int i = 0; i < actual_alloc; i++)
 	{
-		resizedArr[i] = splitAr[i];
+		resized_arr[i] = split_ar[i];
 	}
-	resizedArr[(actualAlloc)] = NULL;
-	free(splitAr);
-	return (resizedArr);
+	resized_arr[(actual_alloc)] = NULL;
+	free(split_ar);
+	return (resized_arr);
 }
-
-// int printArr(char **ptr)
-// {
-//     int i = 0;
-//     while (ptr[i])
-//     {
-//         printf("%d\t%p -> %s\n", i, ptr[i], ptr[i]);
-//         i++;
-//     }
-
-//     return (0);
-// }
-
-// int main()
-// {
-//     char tst0[] = "anatlpha\tlie\t";
-//     char **res = ft_split(tst0, 'l');
-//     printArr(res);
-
-//     char **res1 = ft_split(&"      split       this for   me  !       "[0],'\t');
-		//     printArr(res1);
-
-		//     char **res2 = ft_split(&"      split       this for   me  !       "[0],' ');
-		//     printArr(res2);
-
-		//     return (0);
-		// }

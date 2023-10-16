@@ -1,11 +1,17 @@
 #include <stdio.h>
 
-void ft_bzero(void *block, size_t size)
+void	ft_bzero(void *block, size_t size)
 {
-    char *ptr = (char *)block;
-    for (size_t i = 0; i < size; i++, ptr++)
-    {
-        *ptr = 0;
-    }
-    return;
+	size_t	i;
+	char	*ptr;
+
+	ptr = (char *)block;
+	i = 0;
+	while (i < size)
+	{
+		*ptr = 0;
+		i++;
+		ptr++;
+	}
+	return ;
 }
