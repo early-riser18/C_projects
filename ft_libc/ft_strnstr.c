@@ -13,7 +13,7 @@ char *ft_strnstr(const char *big, const char *little, size_t size)
         return (char *)big;
     }
 
-    while (i < size) // Will timeout for big size values.
+    while (*bigIter && i < size) // Will timeout for big size values.
     {
 
         if (!*littleIter)
