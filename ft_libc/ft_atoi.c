@@ -56,24 +56,3 @@ int	ft_atoi(const char *string)
 	}
 	return (sum * sign);
 }
-
-// int test(int num, const char *string, char *expected)
-// {
-//     printf("\n-----OUTCOME TEST%d------\n Output |%d|\t Expected result: |%s|\n",
-//            num,
-//            ft_atoi(string),
-//            &expected[0]);
-//     return (0);
-// }
-
-// int main()
-// {
-//     test(1, "  1234", "1234");
-//     test(2, "12H4", "12");
-//     test(3, "-1234", "-1234");
-//     test(4, "-12-34", "-12");
-//     test(5, "\t      922334", "922334");
-//     test(6, "022334", "22334");
-
-//     return (0);
-// }
