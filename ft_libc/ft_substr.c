@@ -5,7 +5,11 @@ char	*ft_sub_strtr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 
-	sub_str = malloc(len + 1);
+	if (!s)
+	{
+		return (NULL);
+	}
+	sub_str = malloc(len+1);
 	if (sub_str == NULL)
 	{
 		return (NULL);

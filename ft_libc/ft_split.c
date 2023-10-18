@@ -11,7 +11,14 @@ char	**ft_split(char const *s, char c)
 	long int	actual_alloc;
 	char		**resized_arr;
 	
+	if (!s)
+	{
+		return (NULL);
+	}
 	split_ar = (char **)malloc(sizeof(char *) * ft_strlen(s));
+	if (!split_ar){
+		return (NULL);
+	}
 	tmp_ptr = split_ar;
 	while (*s)
 	{
@@ -23,7 +30,7 @@ char	**ft_split(char const *s, char c)
 			continue ;
 		}
 		*tmp_ptr = (char *)malloc(len_split + 1);
-		if (tmp_ptr == NULL)
+		if (*tmp_ptr == NULL)
 		{
 			printf("Allocation failed\n");
 			return (NULL);
@@ -34,9 +41,8 @@ char	**ft_split(char const *s, char c)
 	}
 	actual_alloc = (tmp_ptr - split_ar);
 	resized_arr = (char **)malloc(sizeof(char *) * (actual_alloc + 1));
-	if (resized_arr == NULL)
+	if (!resized_arr)
 	{
-		printf("Allocation failed\n");
 		return (NULL);
 	}
 	for (int i = 0; i < actual_alloc; i++)

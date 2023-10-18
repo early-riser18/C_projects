@@ -9,13 +9,17 @@ void	*ft_calloc(size_t count, size_t eltsize)
 
 	block_len = count * eltsize;
 	return_ptr = malloc(block_len);
-	if (return_ptr != NULL)
+	if (!return_ptr)
+	{
+		return (NULL);
+	} 
+	else
 	{
 		for (i = 0; i < block_len; i++, return_ptr++)
 		{
 			*(char *)return_ptr = 0;
 		}
 		return_ptr -= (block_len);
-	}
-	return (return_ptr);
+		return (return_ptr);
+	} 
 }
