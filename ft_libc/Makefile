@@ -1,4 +1,4 @@
-SRC = 	./ft_atoi.c \
+SRC = ./ft_atoi.c \
 ./ft_bzero.c \
 ./ft_isalnum.c \
 ./ft_isalpha.c \
@@ -33,16 +33,28 @@ SRC = 	./ft_atoi.c \
 ./ft_striteri.c \
 ./ft_strmapi.c \
 
+
+SRC_BONUS = ./ft_lstnew.c \
+./ft_lstadd_front.c \
+./ft_lstsize.c \
+./ft_lstlast.c \
+./ft_lstadd_back.c \
+./ft_lstdelone.c \
+./ft_lstclear.c \
+./ft_lstiter.c \
+./ft_lstmap.c
+
 file = ft_bzero
 
 OBJ = $(SRC:%.c=%.o)
+OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
 
 NAME = libft.a
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra
 
-.PHONY: all clean fclean re
+.PHONY: all clean bonus fclean re
 
 all: $(NAME) 
 
@@ -57,11 +69,15 @@ $(NAME): $(OBJ)
 
 
 unit:
-	$(CC)  $(file).c -L. -lft -o unit_out
+	$(CC) $(CFLAGS) $(file).c -L. -lft -o unit_out
 	./unit_out
 
+bonus: $(NAME) $(OBJ_BONUS)
+	ar rcs $(NAME) $(OBJ_BONUS)
+	make clean
+
 clean: 
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
