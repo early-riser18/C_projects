@@ -5,7 +5,7 @@ size_t	ft_strlcpy(char *to, const char *from, size_t size)
 {
 	size_t	from_len;
 	size_t	i;
-
+	
 	from_len = ft_strlen(from);
 	i = 0;
 	if (size > 0)
