@@ -1,57 +1,31 @@
 #include "libft.h"
 
-static int	ft_power(int base, int exponent)
-{
-	int	result;
-
-	result = 1;
-	while (exponent > 0)
-	{
-		result *= base;
-		exponent--;
-	}
-	return (result);
-}
-
 int	ft_atoi(const char *string)
 {
 	char	sign;
-	char	parsed_str[12] = {0};
-	size_t	str_len;
-	size_t	it;
 	int		sum;
 	size_t	i;
 
-	it = 0;
 	sum = 0;
 	sign = 1;
 	i = 0;
-	while (!ft_isdigit(*string) && (*string != '-' || *string == '+'))
+	while (string[i] && !ft_isdigit(string[i]) && string[i] != '\e')
 	{
-		string++;
-	}
-	if (*string == '-')
-	{
-		sign *= -1;
-		string++;
-	}
-	while (*string && sizeof(parsed_str) > 0)
-	{
-		if (ft_isdigit(*string))
+		if (string[i] == '-')
 		{
-			parsed_str[it] = *string;
-			it++;
-			string++;
+			sign *= -1;
+			i++;
+			break;
+		} 
+		else if (string[i] == '+')
+		{	i++;
+			break;
 		}
-		else
-		{
-			break ;
-		}
+		i++;
 	}
-	str_len = ft_strlen(parsed_str);
-	while (parsed_str[i])
+	while (string[i] && ft_isdigit(string[i]))
 	{
-		sum += (parsed_str[i] - 48) * ft_power(10, str_len - 1 - i);
+		sum = sum * 10 + string[i] - '0';
 		i++;
 	}
 	return (sum * sign);

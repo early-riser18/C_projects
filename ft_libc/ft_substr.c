@@ -1,7 +1,7 @@
 #include <libc.h>
 #include "libft.h"
 
-char	*ft_sub_strtr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 
@@ -14,5 +14,6 @@ char	*ft_sub_strtr(char const *s, unsigned int start, size_t len)
 	{
 		return (NULL);
 	}
-	return (ft_memcpy(sub_str, &s[start], len));
+	ft_strlcpy(sub_str, &s[start], len+1);
+	return (sub_str);
 }
