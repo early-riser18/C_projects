@@ -23,19 +23,37 @@ static char	*interpret_type(char c, va_list ptr)
 
 int	ft_printf(const char *foo, ...)
 {
-	va_list vars_ptr;
-	int i;
-	char * tstReturn;
+	va_list	vars_ptr;
+	int		i;
+	char	*tstReturn;
 	va_start(vars_ptr, foo);
 
 	i = 0;
 
 	while (foo[i])
 	{
-		tstReturn = interpret_type(foo[i], vars_ptr);
-		printf("%s\n", tstReturn); // Careful if value is not null terminated!
+		// printf("Evaluating |%c|\n", foo[i]);
+		if (foo[i] == '%')
+		{
+			i++;
+			tstReturn = interpret_type(foo[i],vars_ptr);
+			// need error handling if interpret_type returns error.
+		} else 
+		{
+			tstReturn = malloc(2); // is this causing memory leak?
+			*tstReturn = foo[i];
+			*(tstReturn + 1) = 0;
+		}
+
+		while (*tstReturn)
+		{
+			write(1, tstReturn,1);
+			tstReturn++;
+		}
 		i++;
 	}
+
+	va_end(vars_ptr);
 
 
 	return 0;
