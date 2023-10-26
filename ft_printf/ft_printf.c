@@ -4,17 +4,29 @@
 
 static char	*interpret_type(char c, va_list ptr)
 {	
-	char * tst;
+	// printf("Interpreting type of |%c|\n", c);
+	// Returns a string
+	char	*tst;
+	int		i;
 
 	switch (c)
 	{
 		case 'c':
-			*tst = (char)va_arg(ptr, int);
+			tst = malloc(sizeof(char) + 1); // Is this causing a memory leak?
+			tst[0] = (char)va_arg(ptr, int);
+			tst[1] = 0;
 			return tst;
 	
 		case 's':
-			tst = va_arg(ptr, int);
-			// NEED TO FIGURE OUT HOW TO DO STRINGS
+			tst = va_arg(ptr, char*);
+			return tst;
+
+		case '%':
+			tst = malloc(sizeof(char) + 1); // Is this causing a memory leak?
+			tst[0] = '%';
+			tst[1] = 0;
+			return tst; 
+
 
 		default:
 			return NULL;
@@ -71,7 +83,10 @@ int	ft_printf(const char *foo, ...)
 
 int main(void)
 {
-	ft_printf("c",'z');
+
+	// ft_printf("ft_printf-> Output is: %% a8 {%s}\n", &"hello"[0]);
+	ft_printf("A pct:%%\tan int %i\ta str %s\n", 110,&"hello"[0]);
+
 	// printf("%10d \n", 'c');
 
 	return 0;
