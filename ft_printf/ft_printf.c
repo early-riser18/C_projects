@@ -1,93 +1,116 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <libc.h>
+#include "ft_printf.h"
 
-static char	*interpret_type(char c, va_list ptr)
+static size_t	ft_strlen(const char *s)
+{
+	int		len;
+
+	len = 0;
+	while (s[len])
+	{
+		len++;
+	}
+	return (len);
+}
+
+static char	*interpret_type(char c, va_list *va)
 {	
-	// printf("Interpreting type of |%c|\n", c);
-	// Returns a string
-	char	*tst;
+	char	*var_str;
+	char	*temp;
 	int		i;
 
 	switch (c)
 	{
 		case 'c':
-			tst = malloc(sizeof(char) + 1); // Is this causing a memory leak?
-			tst[0] = (char)va_arg(ptr, int);
-			tst[1] = 0;
-			return tst;
-	
+		var_str = malloc(sizeof(char) + 1); 
+		var_str[0] = (char)va_arg(*va, unsigned int);
+		var_str[1] = 0;
+		break;
+
 		case 's':
-			tst = va_arg(ptr, char*);
-			return tst;
+		temp = va_arg(*va, char*);
+		i = 0;
+		var_str = malloc(ft_strlen(temp) + 1);
+		if (!var_str) 
+		{
+			printf("Allocation failed");
+			return (NULL);
+		}
+		while ((size_t)i < ft_strlen(temp) + 1)
+		{
+			var_str[i] = temp[i];
+			i++;
+		}
+		break;
 
 		case '%':
-			tst = malloc(sizeof(char) + 1); // Is this causing a memory leak?
-			tst[0] = '%';
-			tst[1] = 0;
-			return tst; 
+		var_str = malloc(sizeof(char) + 1); 
+		var_str[0] = '%';
+		var_str[1] = 0;
+		break;
 
+		case 'i': 
+		var_str = ft_printf_itoa(va_arg(*va,long int), 0);
+		break;
+
+		case 'd':	
+		var_str = ft_printf_dtoa(va_arg(*va, double));
+		break;
+
+		case 'u':
+		var_str = ft_printf_itoa((unsigned long int)va_arg(*va, unsigned long int), 1);
+		break;
+
+		case 'p':
+		var_str = ft_printf_itoh((unsigned long long)va_arg(*va, void *), 0, 1);
+		break;
+
+		case 'x':
+		var_str = ft_printf_itoh(va_arg(*va, unsigned long long), 0, 0);
+		break;
+
+		case 'X':
+		var_str = ft_printf_itoh(va_arg(*va, unsigned long long), 1, 0);
+		break;
 
 		default:
-			return NULL;
+		printf("convertor '%%%c' invalid.\n", c);
+		return (NULL);
 	}
+	return var_str;
 }
 
 int	ft_printf(const char *foo, ...)
 {
 	va_list	vars_ptr;
 	int		i;
-	char	*tstReturn;
+	char	*curr_var_str;
+	int		j;
+
 	va_start(vars_ptr, foo);
-
 	i = 0;
-
+	j = 0;
 	while (foo[i])
 	{
-		// printf("Evaluating |%c|\n", foo[i]);
 		if (foo[i] == '%')
 		{
 			i++;
-			tstReturn = interpret_type(foo[i],vars_ptr);
-			// need error handling if interpret_type returns error.
-		} else 
-		{
-			tstReturn = malloc(2); // is this causing memory leak?
-			*tstReturn = foo[i];
-			*(tstReturn + 1) = 0;
+			curr_var_str = interpret_type(foo[i], &vars_ptr);
+			write(1, curr_var_str, 1);
+			j++;
+			write(1, &curr_var_str[1],ft_strlen(curr_var_str) -1);
+			j += ft_strlen(&curr_var_str[1]);
+			free(curr_var_str);
 		}
-
-		while (*tstReturn)
+		else
 		{
-			write(1, tstReturn,1);
-			tstReturn++;
+			write(1, &foo[i],1);
+			j++;
 		}
 		i++;
 	}
-
 	va_end(vars_ptr);
-
-
-	return 0;
-}
-
-// va_arg helps me iterate through the variadic arguments
-// set up exception when passed argument does not match the specified format
-// write the string to stdout. each time you meet a %, check the next arg and interpret it accordingly. if you can't throw error. 
-// . + nbr tells you how many digits after the coma to display
-// 0 + nbr tells you how many zeros to put first
-// nbr tells the field's width and justify right, except when - is preceding the nbr. 
-// write to stdout with write 
-
-
-
-int main(void)
-{
-
-	// ft_printf("ft_printf-> Output is: %% a8 {%s}\n", &"hello"[0]);
-	ft_printf("A pct:%%\tan int %i\ta str %s\n", 110,&"hello"[0]);
-
-	// printf("%10d \n", 'c');
-
-	return 0;
+	return (j);
 }
