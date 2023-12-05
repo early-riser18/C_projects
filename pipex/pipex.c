@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		close(0);
 		dup2(fd_pipe[0], 0);
 		close(1);
-		fd_file[1] = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU | S_IRWXG);
+		fd_file[1] = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		dup2(fd_file[1], 1);
 
 		execve(resolve_filepath(ft_split(argv[3], ' ')[0]), parse_args(argv[3]), environ);
