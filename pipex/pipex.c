@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	int fd_pipe[2];
 	int c_pid[2];
 
-	if(argc < 5 || access(argv[1], R_OK) != 0 || access(argv[4], R_OK) != 0)
+	if(argc < 5 || access(argv[1], R_OK) != 0)
 	{
 		exit(1);
 	}
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		close(0);
 		dup2(fd_pipe[0], 0);
 		close(1);
-		fd_file[1] = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
+		fd_file[1] = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU | S_IRWXG);
 		dup2(fd_file[1], 1);
 		
 
