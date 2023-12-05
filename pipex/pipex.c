@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 		dup2(fd_file[0], 0);
 		close(1);
 		dup2(fd_pipe[1], 1);
-		execve(resolve_filepath(ft_split(argv[2], ' ')[0]), ft_split(argv[2], ' '), environ); 
-		printf("did not work 1\n");
+		execve(resolve_filepath(ft_split(argv[2], ' ')[0]), parse_args(argv[2]), environ); 
+		// printf("did not work 1\n");
 		exit(1);
 	}
 	wait(&c_pid[0]);
@@ -58,10 +58,9 @@ int main(int argc, char *argv[])
 		close(1);
 		fd_file[1] = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU | S_IRWXG);
 		dup2(fd_file[1], 1);
-		
 
-		execve(resolve_filepath(ft_split(argv[3], ' ')[0]), ft_split(argv[3], ' '), environ);
-		printf("did not work 2\n");
+		execve(resolve_filepath(ft_split(argv[3], ' ')[0]), parse_args(argv[3]), environ);
+		// printf("did not work 2\n");
 
 		exit(1);
 	}

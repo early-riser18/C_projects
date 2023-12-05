@@ -24,6 +24,25 @@ char	*get_env_val(char *env_key)
 	return (env_val);
 }
 
+char **parse_args(char *args)
+{
+	char **parsed_args;
+	int	i;
+
+	i = 1;
+	parsed_args = ft_split(args, ' ');
+	printf("%s\n", parsed_args[0]);
+	while(parsed_args[i])
+	{	
+		// printf("before parsed arg is %s\n", parsed_args[i]);
+		parsed_args[i] = ft_strtrim(parsed_args[i], "\"");
+		// printf("newly parsed arg is %s\n", parsed_args[i]);
+		i++;
+	}
+
+	return parsed_args;
+}
+
 char	*resolve_filepath(char *short_path)
 {
 	char *path;
