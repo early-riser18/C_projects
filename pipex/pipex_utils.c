@@ -52,6 +52,11 @@ char	*resolve_filepath(char *short_path)
 	i = 0;
 	path = get_env_val("PATH");
 	path_stub = NULL;
+
+	if (access(short_path, X_OK) == 0)
+	{
+		return short_path;
+	}
 	while(path[i])
 	{
 		// printf("checlking %c\n", path[i]);
