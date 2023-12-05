@@ -10,13 +10,12 @@ NAME = pipex
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) -fsanitize=address $(SRC) -o $@ -L. -lft
+	$(CC) $(CFLAGS)  $(SRC) -o $@ -L. -lft
 
 unit:
-	clang $(FILE).c -L. -lft -o unit_out
-	rm outfile.txt
-	touch outfile.txt
-	./unit_out file1.txt "grep a1" "wc -w" outfile.txt 
+	$(CC) $(CFLAGS)  $(SRC) -fsanitize=address -o $(NAME) -L. -lft
+
+
 
 clean:
 
