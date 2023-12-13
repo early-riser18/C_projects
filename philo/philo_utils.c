@@ -89,7 +89,7 @@ int	get_forks(t_s_philo *philo)
 	log_state(philo, "has taken a fork");
 	pthread_mutex_lock(fork_pair[1]);
 	log_state(philo, "has taken a fork");
-	// NEED TO FREE??
+	free(fork_pair);
 	return (0);
 }
 

@@ -22,6 +22,7 @@ void	*philosopher_t(void *args)
 		sleep_philo(thread_args);
 	}
 	thread_args->status->completed_count++;
+	free(args);
 	return (NULL);
 }
 
