@@ -52,8 +52,6 @@ pthread_mutex_t	**find_forks(t_s_philo *philo)
 	int				id;
 	pthread_mutex_t	**fork_pair;
 
-	// TODO: How to make sure forks are being searched only once all threads have been created?
-	// printf("find_fork(): fork_arr address is %p\n", philo->fork_arr);
 	fork_pair = (pthread_mutex_t **)malloc(2 * sizeof(pthread_mutex_t));
 	if (!fork_pair)
 	{
@@ -79,7 +77,6 @@ pthread_mutex_t	**find_forks(t_s_philo *philo)
 		fork_pair[0] = *(*(philo->fork_arr) + id - 1);
 		fork_pair[1] = *(*(philo->fork_arr) + 0);
 	}
-	// printf("Forks found at address %p and %p\n", fork_pair[0], fork_pair[1]);
 	return (fork_pair);
 }
 
@@ -94,21 +91,17 @@ int	get_forks(t_s_philo *philo)
 	log_state(philo, "has taken a fork");
 	// NEED TO FREE??
 	return (0);
-	// TODO: check if failure and return (1);
 }
 
 int	release_forks(t_s_philo *philo)
 {
 	pthread_mutex_t	**fork_pair;
 
-	// printf("%d Getting forks...\n", philo->philo_id);
 	fork_pair = find_forks(philo);
-	// printf("%d Unlocking forks...\n", philo->philo_id);
 	pthread_mutex_unlock(fork_pair[0]);
 	pthread_mutex_unlock(fork_pair[1]);
-	// printf("%d Forks unlocked\n", philo->philo_id);
 	return (0);
-	// TODO: check if failure and return (1);
+
 }
 
 void	eat_philo(t_s_philo *philo)
@@ -144,7 +137,6 @@ int	check_health(t_s_philo *philo)
 	{
 		log_state(philo, "died");
 		return (1);
-		// TODO: How to close parent process without using exit()
 	}
 	return (0);
 }

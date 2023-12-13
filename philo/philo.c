@@ -24,8 +24,6 @@ void	*philosopher_t(void *args)
 	thread_args->status->completed_count++;
 	return (NULL);
 }
-//#TODO validate inputs passed by STDIN
-//#TODO support input beyond the max microseconds val (also bug prone even if little vals passed)
 
 void	init_philo(t_s_philo *philo, pthread_mutex_t ***forks, char *argv[],
 		struct s_philo_status *status)
@@ -34,7 +32,6 @@ void	init_philo(t_s_philo *philo, pthread_mutex_t ***forks, char *argv[],
 
 	pthread_mutex_init((*(forks))[id - 1], NULL);
 	philo->fork_arr = forks;
-	// printf("philo's fork_arr has value %p\n", philo->fork_arr);
 	philo->philo_id = id;
 	philo->time_to_die = ft_atoi(argv[2]) * 1000;
 	philo->time_to_eat = ft_atoi(argv[3]) * 1000;
