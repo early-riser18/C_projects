@@ -4,7 +4,7 @@
 
 void	*philosopher_t(void *args)
 {
-	t_s_philo		*thread_args;
+	t_s_philo	*thread_args;
 	struct timeval	tv;
 
 	thread_args = (t_s_philo *)args;
@@ -50,11 +50,11 @@ void	init_philo(t_s_philo *philo, pthread_mutex_t ***forks, char *argv[],
 
 int	main(int argc, char *argv[])
 {
-	int						nbr_philo;
-	int						i;
-	t_s_philo				**philosophers;
-	pthread_mutex_t			**forks;
-	struct s_philo_status	*status;
+	int					nbr_philo;
+	int					i;
+	t_s_philo			**philosophers;
+	pthread_mutex_t		**forks;
+	struct s_philo_status *status;
 
 	(void)argc;
 	nbr_philo = ft_atoi(argv[1]);
