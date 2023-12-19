@@ -5,9 +5,9 @@ extern char	**environ;
 
 char	*get_env_val(char *env_key)
 {
-	int			i;
-	size_t		len_key;
-	char		*env_val;
+	int		i;
+	size_t	len_key;
+	char	*env_val;
 
 	i = 0;
 	env_val = NULL;
@@ -18,7 +18,7 @@ char	*get_env_val(char *env_key)
 			&& environ[i][len_key] == '=')
 		{
 			env_val = environ[i] + len_key + 1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -32,7 +32,6 @@ char	**parse_args(char *args)
 
 	i = 1;
 	parsed_args = ft_split(args, ' ');
-	printf("%s\n", parsed_args[0]);
 	while (parsed_args[i])
 	{
 		parsed_args[i] = ft_strtrim(parsed_args[i], "\"");
@@ -41,7 +40,7 @@ char	**parse_args(char *args)
 	return (parsed_args);
 }
 
-char	*resolve_filepath(char *short_path)
+char	*resolve_filepath(char *cmd)
 {
 	char	*path;
 	char	*path_stub;
@@ -50,9 +49,9 @@ char	*resolve_filepath(char *short_path)
 	i = 0;
 	path = get_env_val("PATH");
 	path_stub = NULL;
-	if (access(short_path, X_OK) == 0)
+	if (access(cmd, X_OK) == 0)
 	{
-		return (short_path);
+		return (cmd);
 	}
 	while (path[i])
 	{
@@ -62,15 +61,12 @@ char	*resolve_filepath(char *short_path)
 		}
 		else if (i > 0)
 		{
-			path_stub = malloc(i + ft_strlen(short_path) + 1);
+			path_stub = malloc(i + ft_strlen(cmd) + 1);
 			ft_strlcpy(path_stub, path, i + 1);
 			path_stub[i] = '/';
-			ft_strlcat(&path_stub[i + 1],
-				short_path,
-				ft_strlen(short_path) + 1);
+			ft_strlcat(&path_stub[i + 1], cmd, ft_strlen(cmd) + 1);
 			if (access(path_stub, X_OK) == 0)
 			{
-				printf("path found %s \n", path_stub);
 				return (path_stub);
 			}
 			path = &path[i + 1];
