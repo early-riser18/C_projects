@@ -79,3 +79,35 @@ char	*resolve_filepath(char *short_path)
 	}
 	return (NULL);
 }
+
+int	*create_child(int fd_in, int fd_out, char *cmd_str, char **environ)
+{
+	char	*cmd;
+	char	*cmd_path;
+	char	**args_val;
+	int		*c_pid;
+
+	(void)fd_out;
+	c_pid = malloc(sizeof(int));
+	*c_pid = fork();
+	if (*c_pid < 0)
+	{
+		exit(1);
+	}
+	else if (*c_pid == 0)
+	{
+		dup2(fd_in, 0);
+		dup2(fd_out, 1);
+		cmd = ft_split(cmd_str, ' ')[0];
+		cmd_path = resolve_filepath(cmd);
+		args_val = parse_args(cmd_str);
+		execve(cmd_path, args_val, environ);
+		exit(1);
+	}
+	return (c_pid);
+}
+
+int	validate_input(int argc, char *argv[])
+{
+	return (argc < 5 || access(argv[1], R_OK) != 0);
+}
