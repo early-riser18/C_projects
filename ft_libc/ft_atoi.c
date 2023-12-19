@@ -15,11 +15,12 @@ int	ft_atoi(const char *string)
 		{
 			sign *= -1;
 			i++;
-			break;
-		} 
+			break ;
+		}
 		else if (string[i] == '+')
-		{	i++;
-			break;
+		{
+			i++;
+			break ;
 		}
 		i++;
 	}

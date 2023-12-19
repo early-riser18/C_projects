@@ -1,12 +1,13 @@
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	int		i;
 	char	*new_str;
 
-	if( !s || !f){
+	if (!s || !f)
+	{
 		return (NULL);
 	}
 	i = 0;

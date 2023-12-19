@@ -10,13 +10,14 @@ char	**ft_split(char const *s, char c)
 	int			len_split;
 	long int	actual_alloc;
 	char		**resized_arr;
-	
+
 	if (!s)
 	{
 		return (NULL);
 	}
 	split_ar = (char **)malloc(sizeof(char *) * ft_strlen(s));
-	if (!split_ar){
+	if (!split_ar)
+	{
 		return (NULL);
 	}
 	tmp_ptr = split_ar;

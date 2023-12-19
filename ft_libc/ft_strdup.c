@@ -1,12 +1,12 @@
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strdup(const char *s)
 {
 	size_t	str_byte_size;
 	void	*return_ptr;
 
-	str_byte_size = ft_strlen(s) +1;
+	str_byte_size = ft_strlen(s) + 1;
 	return_ptr = malloc(str_byte_size);
 	if (return_ptr != NULL)
 	{

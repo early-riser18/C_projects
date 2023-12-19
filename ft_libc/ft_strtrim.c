@@ -1,5 +1,5 @@
-#include <libc.h>
 #include "libft.h"
+#include <libc.h>
 
 static int	ft_is_in_set(char c, const char *set)
 {
@@ -18,7 +18,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	char	*trimmed;
 
-	if (!s1 || !set){
+	if (!s1 || !set)
+	{
 		return (NULL);
 	}
 	start = 0;

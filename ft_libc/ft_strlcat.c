@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "libft.h"
+#include <stdio.h>
 
 size_t	ft_strlcat(char *to, const char *from, size_t size)
 {

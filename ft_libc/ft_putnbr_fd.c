@@ -1,7 +1,7 @@
-#include <unistd.h>
 #include "libft.h"
 #include <fcntl.h>
 #include <libc.h>
+#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {

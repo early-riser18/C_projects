@@ -4,7 +4,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (!lst || !f)
 	{
-		return;
+		return ;
 	}
 	f(lst->content);
 	if (lst->next)

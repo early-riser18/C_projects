@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include "libft.h"
 #include <libc.h>
+#include <stdio.h>
 
 static long int	power(int base, int exponent)
 {
@@ -51,7 +51,7 @@ char	*ft_itoa(int n)
 			}
 			else if (str_nbr[0] && str_nbr[ft_strlen(str_nbr) - 1] != '-')
 			{
-				str_nbr[ft_strlen(str_nbr)] = (char) 48;
+				str_nbr[ft_strlen(str_nbr)] = (char)48;
 			}
 			exponent--;
 		}

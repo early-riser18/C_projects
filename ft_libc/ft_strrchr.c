@@ -3,7 +3,7 @@
 char	*ft_strrchr(const char *string, int c)
 {
 	char	*last_occurence;
-	
+
 	last_occurence = NULL;
 	while (*string)
 	{
