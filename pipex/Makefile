@@ -1,5 +1,6 @@
 SRC = pipex.c \
 pipex_utils.c
+OBJ = ${SRC:%.c=%.o}
 FILE = null
 
 CC = clang
@@ -9,18 +10,18 @@ NAME = pipex
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS)  $(SRC) -o $@ -L. -lft
 
-unit:
-	$(CC) $(CFLAGS)  $(SRC) -fsanitize=address -o $(NAME) -L. -lft
+%.o: %.c
+	$(CC)  $(CFLAGS) -c $< -o $@ 
 
 
 
 clean:
+	rm ${OBJ}
 
-
-fclean:
+fclean: clean
 	rm $(NAME)
 
 re: fclean all
